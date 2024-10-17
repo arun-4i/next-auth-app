@@ -7,15 +7,15 @@ import { cookies } from "next/headers";
 
 export default async function Home() {
 
-  const session = await auth();
-  console.log("SessionDetails: ", session?.user);
+  // const session = await auth();
+  // console.log("SessionDetails: ", session?.user);
 
-  const LoggedUser = cookies().get("authjs.session-token");
-  console.log("Logged User:", await decode({
-    token: LoggedUser?.value!,
-    salt: LoggedUser?.name!,
-    secret: process.env.AUTH_SECRET!,
-  }));
+  // const LoggedUser = cookies().get("authjs.session-token");
+  // console.log("Logged User:", await decode({
+  //   token: LoggedUser?.value!,
+  //   salt: LoggedUser?.name!,
+  //   secret: process.env.AUTH_SECRET!,
+  // }));
   // console.log("Cookie", LoggedUser);
   return (
     <div className="flex flex-col min-h-screen">

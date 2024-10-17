@@ -7,15 +7,14 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Loginform } from "@/components/ui/client/form";
+import { Loginform } from "@/components/client/form";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 
-const page = async() => {
-
+const page = async () => {
   const session = await auth();
-  if(session?.user) redirect("/");
-    
+  if (session?.user) redirect("/protected");
+
   return (
     <div className="flex justify-center items-center h-dvh">
       <Card>
@@ -23,14 +22,16 @@ const page = async() => {
           <CardTitle>Login</CardTitle>
         </CardHeader>
         <CardContent>
-                <Loginform/>
+          <Loginform />
         </CardContent>
         <CardFooter className="flex flex-col gap-4">
           <span>Or</span>
-                  <form action={async () => {
-                      "use server"
-                      await signIn("google");
-          }}>
+          <form
+            action={async () => {
+              "use server";
+              await signIn("google");
+            }}
+          >
             <Button type="submit" variant={"outline"}>
               Login with Google
             </Button>

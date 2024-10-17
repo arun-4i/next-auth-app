@@ -1,8 +1,8 @@
 "use client";
 
 import { toast } from "sonner";
-import { Button } from "../button";
-import { Input } from "../input";
+import { Button } from "../ui/button";
+import { Input } from "../ui/input";
 import { loginHandler } from "@/actions/login";
 import { useRouter } from "next/navigation";
 export const Loginform = () => {
@@ -25,11 +25,12 @@ export const Loginform = () => {
           toast.success("Logged in successfully", {
             id: toastId,
           });
-          router.refresh();
+          // router.refresh();
+          router.push("/protected")
         } else {
           toast.error(String(error), {
             id: toastId,
-          })
+          });
         }
       }}
       className="flex flex-col gap-4"
