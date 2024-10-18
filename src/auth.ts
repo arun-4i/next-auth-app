@@ -70,7 +70,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     },
     async session({ session, token }) {
       // Send properties to the client
-      session.user.id = token.id;
+      session.user.id = token.id as string;
       // Add any other fields you want to include in the session
       return session;
     },
@@ -100,6 +100,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     strategy: "jwt",
   },
   jwt: {
-    maxAge: 60 * 60 * 24, // 24 hours
+    maxAge: 60 * 60 * 24,
+
   },
 });

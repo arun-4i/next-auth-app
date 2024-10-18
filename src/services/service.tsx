@@ -7,5 +7,6 @@ export const getCountryDetails = async (countryName: string) => {
     return response.data;
   } catch (error) {
     console.log(error);
+     throw new Error("Failed to fetch country details. Please try again.");
   }
 };

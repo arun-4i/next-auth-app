@@ -1,5 +1,6 @@
-import BumpChart from "@/components/dashboard/bump-chart";
-import RadialBarChart from "@/components/dashboard/radialbar-chart";
+import BumpChart from "@/components/client/dashboard/bump-chart";
+import RadialBarChart from "@/components/client/dashboard/radialbar-chart";
+import { SearchBar } from "@/components/client/dashboard/search";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 const Dashboard = () => {
@@ -25,8 +26,9 @@ const Dashboard = () => {
         </Card>
       </div>
       <div>
-        <Card className="h-96">
-          <CardContent className="h-3/4 w-full p-0">
+        <Card className="min-h-96">
+          <CardContent className=" h-3/4 w-full p-0">
+            <SearchBar />
           </CardContent>
         </Card>
       </div>
