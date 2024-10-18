@@ -1,7 +1,9 @@
 
+import HomePage from "@/components/protected/homepage"
+
 const page = () => {
   return (
-    <div>Protected Home Page</div>
+    <div><HomePage/></div>
   )
 }
 

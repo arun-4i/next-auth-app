@@ -58,6 +58,22 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     // signOut: "/logout",
   },
   callbacks: {
+    async jwt({ token, user }) {
+      if (user) {
+        // This will run when the user first signs in
+        token.id = user.id;
+        token.email = user.email;
+        token.name = user.name;
+        // Add any other fields you want to include in the token
+      }
+      return token;
+    },
+    async session({ session, token }) {
+      // Send properties to the client
+      session.user.id = token.id;
+      // Add any other fields you want to include in the session
+      return session;
+    },
     signIn: async ({ user, account }) => {
       if (account?.provider === "google") {
         try {
@@ -79,5 +95,11 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       }
       return false;
     }
-  }
+  },
+  session: {
+    strategy: "jwt",
+  },
+  jwt: {
+    maxAge: 60 * 60 * 24, // 24 hours
+  },
 });
