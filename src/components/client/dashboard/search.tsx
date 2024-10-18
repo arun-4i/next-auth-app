@@ -13,9 +13,9 @@ import {
   FormItem,
   FormMessage,
 } from "../../ui/form";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { getCountryDetails } from "@/services/service";
-import Image from "next/image";
+// import Image from "next/image";
 import {
   Table,
   TableBody,
@@ -25,6 +25,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { toast } from "sonner";
+import Image from "next/image";
 
 const formSchema = z.object({
   country: z.string().min(1, { message: "Country is required" }),
@@ -52,9 +53,9 @@ export function SearchBar() {
     }
   };
 
-  useEffect(() => {
-    console.log("responseData: ", responseData.flags);
-  }, [responseData]);
+  // useEffect(() => {
+  //   console.log("responseData: ", responseData.flags);
+  // }, [responseData]);
 
   return (
     <div className="flex flex-col p-4 gap-4">
@@ -96,50 +97,70 @@ export function SearchBar() {
       {responseData.name && responseData.flags ? (
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-2">
           <div className="flex justify-center items-center">
-            <img src={flag} alt="Flag" className="rounded-md" />
+            <Image
+              src={flag}
+              alt="Flag"
+              className="rounded-md"
+              width={520} // Specify the width
+              height={400}
+            />
           </div>
           <div>
             <Table className="border border-gray-300 rounded-md">
               <TableHeader>
                 <TableRow>
-                  <TableHead>Field</TableHead>
-                  <TableHead>Details</TableHead>
+                  <TableHead className="text-dark">Field</TableHead>
+                  <TableHead className="text-dark">Details</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
                 <TableRow>
                   <TableCell>Official Name</TableCell>
-                  <TableCell>{responseData.name?.official || "N/A"}</TableCell>
+                  <TableCell className="text-muted-foreground">
+                    {responseData.name?.official || "N/A"}
+                  </TableCell>
                 </TableRow>
                 <TableRow>
                   <TableCell>Common Name</TableCell>
-                  <TableCell>{responseData.name?.common || "N/A"}</TableCell>
+                  <TableCell className="text-muted-foreground">
+                    {responseData.name?.common || "N/A"}
+                  </TableCell>
                 </TableRow>
                 <TableRow>
                   <TableCell>Capital</TableCell>
-                  <TableCell>{responseData.capital?.[0] || "N/A"}</TableCell>
+                  <TableCell className="text-muted-foreground">
+                    {responseData.capital?.[0] || "N/A"}
+                  </TableCell>
                 </TableRow>
                 <TableRow>
                   <TableCell>Region</TableCell>
-                  <TableCell>{responseData.region || "N/A"}</TableCell>
+                  <TableCell className="text-muted-foreground">
+                    {responseData.region || "N/A"}
+                  </TableCell>
                 </TableRow>
                 <TableRow>
                   <TableCell>Subregion</TableCell>
-                  <TableCell>{responseData.subregion || "N/A"}</TableCell>
+                  <TableCell className="text-muted-foreground">
+                    {responseData.subregion || "N/A"}
+                  </TableCell>
                 </TableRow>
                 <TableRow>
                   <TableCell>Continent</TableCell>
-                  <TableCell>{responseData.continents?.[0] || "N/A"}</TableCell>
+                  <TableCell className="text-muted-foreground">
+                    {responseData.continents?.[0] || "N/A"}
+                  </TableCell>
                 </TableRow>
                 <TableRow>
                   <TableCell>Area</TableCell>
-                  <TableCell>
+                  <TableCell className="text-muted-foreground">
                     {responseData.area ? `${responseData.area} km²` : "N/A"}
                   </TableCell>
                 </TableRow>
                 <TableRow>
                   <TableCell>Population</TableCell>
-                  <TableCell>{responseData.population || "N/A"}</TableCell>
+                  <TableCell className="text-muted-foreground">
+                    {responseData.population || "N/A"}
+                  </TableCell>
                 </TableRow>
               </TableBody>
             </Table>

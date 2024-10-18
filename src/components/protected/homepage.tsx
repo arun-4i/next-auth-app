@@ -3,6 +3,15 @@
 import { userDetails } from "@/actions/login";
 import { useEffect, useState } from "react";
 
+// export async function getServerSideProps() {
+//   try {
+//     const userData = await userDetails();
+//     return { props: { userData } };
+//   } catch (error) {
+//     console.error("Error fetching user details:", error);
+//     return { props: { userData: null } }; // Return null or some default object
+//   }
+// }
 
 interface UserData {
   name: string;
@@ -24,7 +33,16 @@ const HomePage = () => {
       fetchUserData();
     }, []);
 
-  
+  if (!userData) {
+    return (
+      <div className="flex justify-center">
+        <div className="flex flex-col">
+          <h1 className="text-7xl font-bold mb-4">Error fetching user data.</h1>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="flex justify-center">
       <div className="flex flex-col">
