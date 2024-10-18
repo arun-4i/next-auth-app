@@ -12,8 +12,8 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 
 const page = async () => {
-  const session = await auth();
-  if (session?.user) redirect("/protected");
+  // const session = await auth();
+  // if (session?.user) redirect("/");
 
   return (
     <div className="flex justify-center items-center h-dvh">

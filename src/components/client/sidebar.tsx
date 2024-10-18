@@ -37,7 +37,7 @@ export default function Sidebar() {
       </div>
       <div className="flex flex-col h-full py-4">
         <nav className="space-y-2 flex-grow">
-          <Link href="/protected/home">
+          <Link href="/home">
             <Button
               variant="ghost"
               className="w-full justify-start"
@@ -47,7 +47,7 @@ export default function Sidebar() {
             </Button>
           </Link>
 
-          <Link href="/protected/dashboard">
+          <Link href="/dashboard">
             <Button
               variant="ghost"
               className="w-full justify-start"

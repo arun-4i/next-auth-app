@@ -1,26 +1,30 @@
-// app/middleware.js
 import { NextResponse } from "next/server";
-import type { NextRequest } from "next/server";
+import { NextRequest } from "next/server";
 
 export function middleware(req: NextRequest) {
   const token = req.cookies.get("authjs.session-token");
 
-  console.log("Request Path:", req.nextUrl.pathname); // Debug log
-  console.log("Token:", token); // Debug log
-
-  // Define protected routes
-  const isProtectedRoute = req.nextUrl.pathname.startsWith("/protected");
-
-  // Check if the request is for a protected route
-  if (isProtectedRoute) {
-    if (!token) {
-      return NextResponse.redirect(new URL("/login", req.url)); // Redirect if no token
-    }
+  // Redirect to protected if already authenticated and trying to access login or signup
+  if (
+    token &&
+    (req.nextUrl.pathname === "/login" || req.nextUrl.pathname === "/signup")
+  ) {
+    return NextResponse.redirect(new URL("/home", req.url));
   }
 
+  // Redirect to "/login" if not authenticated and trying to access a protected route
+  if (
+    !token &&
+    req.nextUrl.pathname !== "/login" &&
+    req.nextUrl.pathname !== "/signup"
+  ) {
+    return NextResponse.redirect(new URL("/login", req.url));
+  }
+
+  // Allow the request to proceed
   return NextResponse.next();
 }
 
 export const config = {
-  matcher: ["/protected/:path*"], // Only apply to protected routes
+  matcher: ["/((?!api|_next/static|_next/image|.*\\.png$).*)"],
 };

@@ -26,7 +26,7 @@ export const Loginform = () => {
             id: toastId,
           });
           // router.refresh();
-          router.push("/protected")
+          router.push("/home");
         } else {
           toast.error(String(error), {
             id: toastId,
